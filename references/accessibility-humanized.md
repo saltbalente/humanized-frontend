@@ -258,7 +258,7 @@ Unplug your mouse. Navigate the entire site. Note every spot where you got stuck
 <img src="grain.svg" alt="" role="presentation">
 
 <!-- Informative -->
-<img src="founder.jpg" alt="Edwar trabajando en su escritorio en Medellín, marzo 2026">
+<img src="founder.jpg" alt="Founder trabajando en su escritorio, marzo 2026">
 ```
 
 ### Hand-drawn icons

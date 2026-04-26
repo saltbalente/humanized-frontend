@@ -13,7 +13,7 @@ The voice you write in is dictated by your DNA's **copy tone** slot (e.g. `first
 3. **Mix sentence length wildly.** Long flowing thought. Punch. Then a medium one with a pause, comma, like this. Short again.
 4. **Have a strong opinion.** State what you believe, not what's safe.
 5. **Anecdotes > benefits.** "El otro día un cliente…" beats any feature bullet.
-6. **First person + name names.** "Soy Edwar y construí esto porque…" beats "Our team built…".
+6. **First person + name names.** "Soy [tu nombre] y construí esto porque…" beats "Our team built…".
 7. **Friction is honest.** Mention what your product is NOT, who should NOT use it.
 8. **Cut filler.** Banned words list below — search and destroy.
 9. **No emoji in section titles.** Max 2 emojis on the whole page, in body copy, used naturally.
@@ -89,7 +89,7 @@ Search your copy for any of these. Each one is an instant "AI wrote this" signal
 | "Sign Up Free" | "Crear cuenta (toma 30s)" |
 | "Book a Demo" | "Hablemos 15 min, sin pitch" |
 | "Try for Free" | "Probarlo sin tarjeta" |
-| "Contact Sales" | "Hablar con Edwar" |
+| "Contact Sales" | "Hablar con [el founder]" |
 | "Subscribe Now" | "Mándamelo cada viernes" |
 | "Download App" | "Bajarlo (12 MB)" |
 
@@ -124,7 +124,7 @@ Search your copy for any of these. Each one is an instant "AI wrote this" signal
 
 | ❌ | ✅ |
 |----|----|
-| "Our team of passionate experts is dedicated to delivering world-class solutions for forward-thinking businesses." | "Somos dos. Edwar (escribe el código) y Lía (escribe todo lo demás). Trabajamos desde Medellín. Si nos escribes los martes contesta Lía, los demás días yo." |
+| "Our team of passionate experts is dedicated to delivering world-class solutions for forward-thinking businesses." | "Somos dos. Uno escribe el código, la otra escribe todo lo demás. Trabajamos desde la misma ciudad. Si nos escribes los martes contesta ella, los demás días yo." |
 
 ---
 

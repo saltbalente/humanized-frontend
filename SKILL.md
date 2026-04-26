@@ -3,7 +3,7 @@ name: humanized-frontend
 description: "Anti-vibe-coded frontend design system with a Design DNA engine that produces a UNIQUE design every run (25 systems × 50 palettes × 40 type pairings × 44 niche playbooks = 10B+ combos). Use when building, designing, reviewing or refactoring websites, landing pages, SaaS, portfolios, e-commerce, dashboards, blogs in any stack (HTML, React, Next.js, Vue, Svelte, Tailwind, shadcn/ui). Triggers: humanize UI, anti-AI design, unique landing, niche-aware design, fintech site, wellness site, indie hacker site, crypto site, restaurant site, dev-tool site, brutalism, editorial, swiss minimal, art deco, y2k, terminal UI, organic eco, kinfolk, vaporwave, japanese ma, riso print, blueprint, monochrome noir, replace heroicons, kill purple gradient, humanize copy, em dash removal, real testimonials, audit ai look, accessibility humanized, focus states, prefers-reduced-motion, contrast WCAG, creative dark mode, mobile touch feel, touch targets, safe-area, soul pass, micro-imperfections, signature element, founder anecdote, motion physics, framer motion, gsap, springs, stagger, magnetic CTA, layered shadows, grain noise texture, neobrutalism, glassmorphism, design tokens, scalable AI design system, css variables, tailwind v4. Output is always opinionated, niche-appropriate, accessible, mobile-tactile, motion-aware, texture-rich, token-driven and visually distinct from any other site this skill has produced. Includes prompts for Claude Code, Codex, Cursor, v0, Lovable, Bolt."
 argument-hint: "[dna|brief|audit|prompt|review|build] <niche or path>"
 license: MIT
-author: Edwar Bechara
+author: saltbalente
 version: 2.2.0
 ---
 

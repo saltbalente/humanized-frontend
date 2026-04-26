@@ -2,7 +2,7 @@
 
 > **Anti-vibe-coded design skill for AI coding agents.** With a Design DNA engine that produces a unique design every run — 25 systems × 50 palettes × 40 type pairings × 30+ niche playbooks = **>10 billion combinations**.
 
-By [Edwar Bechara](https://github.com/saltbalente) · MIT · v2.0.0
+By [saltbalente](https://github.com/saltbalente) · MIT
 
 ---
 
@@ -104,4 +104,4 @@ MIT — use it commercially, fork it, remix it. Credit appreciated, not required
 > If two sites built with this skill look alike, the skill failed.
 > If a non-techie can't tell your site was AI-built, the skill won.
 
-— Edwar Bechara
+— saltbalente
