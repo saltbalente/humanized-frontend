@@ -1,166 +1,201 @@
-# Prompt Library (Claude Code · Codex · Cursor · v0)
+# Prompt Library — DNA-aware
 
-All prompts are pre-tested. Always **attach a reference screenshot** of a real human-made site you love (Pitch, Linear pre-2024, Are.na, personal portfolios on awwwards "anti-design" tag, etc.).
+Every prompt has a **`{{DNA}}` placeholder**. Always run `bash scripts/dna.sh <niche>` first and paste the full output where indicated. This is what guarantees uniqueness.
 
----
-
-## 1. Universal "Avoid List" snippet (paste into every prompt)
+## Universal "Avoid List" snippet (paste into every prompt)
 
 ```
-AVOID AT ALL COSTS:
+NEVER, under any circumstance, output:
 - Purple/pink/blue gradients (no `from-purple-500`, `to-pink-500`, etc.)
-- Glassmorphism / backdrop-blur
+- Glassmorphism / backdrop-blur (unless DNA system is sci-fi-spatial)
 - shadow-xl + rounded-2xl combo
 - Heroicons or Lucide default icons
 - Em dashes (—) in any copy
-- Words: unleash, empower, seamless, elevate, transform, leverage, robust, game-changer
-- Perfectly centered symmetric layouts
-- Floating 3D blobs or glossy cards
-- Pure white #FFFFFF backgrounds
+- Words: unleash, empower, seamless, elevate, transform, leverage, robust, game-changer, synergy
+- Perfectly centered symmetric layouts (unless DNA layout is `centered-editorial-drop-cap-intro`)
+- Floating 3D blobs or glossy cards (unless DNA system is y2k-revival or neo-skeuomorphic)
 - Default shadcn/ui look out of the box
+- Stock-photo people pointing at laptops
 ```
 
 ---
 
-## 2. Landing page — soft brutalism
+## 1. MASTER PROMPT — DNA-driven build (works for any tool)
 
 ```
-Build a landing page in [Next.js 15 + Tailwind v4 + TypeScript].
+You are building a [PROJECT TYPE: landing / dashboard / portfolio / e-commerce / blog]
+in [STACK: Next.js + Tailwind v4 / Astro / SvelteKit / plain HTML / etc].
 
-REFERENCE: I'm attaching a screenshot of [name a real human site]. Match its energy, not its exact layout.
+═══ DESIGN DNA — TREAT AS CONTRACT ═══
+{{DNA}}
+═══════════════════════════════════════
 
-STYLE: Soft brutalism + warm SaaS. Cream background (#F4EFE6), ink black (#1A1A1A),
-single accent #FF5C39. Serif display font (Fraunces or Instrument Serif) + Inter for body.
-Use 1–2px solid black borders and offset shadows like `shadow-[4px_4px_0_#000]` instead of soft shadows.
-Mix radii (mostly rounded-none, some rounded-[2px]).
-
-LAYOUT:
-- Hero: headline left, oversized serif (clamp(3.5rem, 9vw, 8rem), leading-[0.9]),
-  one keyword underlined in accent. Real photo bleeding to right edge.
-  CTA is a brutalist button with offset shadow.
-- 3 asymmetric value props (rotate cards -0.6° / +0.4° / -1°).
-- One section with a hand-drawn SVG arrow connecting two ideas.
-- Testimonials: only 2, with full name + city, slightly off-aligned.
-- Footer: opinionated, first person.
-
-COPY: First-person voice. Short and long sentences mixed. Include one anecdote
-and one "what this is NOT". No motivational filler.
+RULES:
+1. Apply the DNA system EXACTLY. Read references/design-systems.md for that system.
+2. Use ONLY the 4 colors from the DNA palette. No additions.
+3. Use ONLY the typography pair from DNA. Import from Google Fonts or Fontshare.
+4. Apply the surface treatment to ALL surfaces. Do not mix.
+5. The signature element MUST appear at least once and must feel intentional.
+6. Copy tone is locked to the DNA tone. Apply rules from references/copywriting-humanizer.md.
+7. Niche must-haves: read references/niche-playbooks.md for the niche in DNA.
 
 [paste universal AVOID LIST here]
 
-Generate 3 variants of the hero and let me pick.
+DELIVERABLE: production-ready code, semantic HTML, accessible (WCAG AA min),
+responsive (test 360 / 768 / 1280 / 1920), respects prefers-reduced-motion.
+
+Generate 3 hero variants under the same DNA constraints — let me pick.
 ```
 
 ---
 
-## 3. SaaS hero refactor (humanize an existing one)
+## 2. Refactor / humanize an existing UI
 
 ```
-Here is my current hero component: [paste code].
+Refactor the file [path]. Functionality unchanged.
 
-Refactor it to feel hand-made and opinionated. Keep functionality identical.
+═══ TARGET DESIGN DNA ═══
+{{DNA}}
+═════════════════════════
 
-Changes required:
-1. Replace the gradient background with a solid warm color of your choice from
-   {#F4EFE6, #ECECEA, #FFF8E7}.
-2. Replace the headline font with a serif with character.
-3. Break symmetry: offset the CTA group by 8px to the right and rotate the
-   product image -1.5°.
-4. Replace the "Get Started" button with a brutalist button (border-2 border-black,
-   offset shadow, hover translate effect).
-5. Rewrite the headline in first person, max 7 words, with one strong opinion.
-6. Remove all em dashes, replace with periods or commas.
-7. Add a tiny handwritten-style note (use a script-y Google Font like Caveat) with
-   an arrow SVG pointing at the CTA.
+Steps:
+1. Replace background, borders, shadows, radii to match DNA system + surface.
+2. Replace fonts with DNA typography pair (load from Google Fonts).
+3. Recolor to DNA's 4-token palette only.
+4. Apply DNA layout archetype to the page skeleton.
+5. Inject DNA signature element (one place is enough, must feel earned).
+6. Rewrite copy in DNA tone. Strip em dashes, banned buzzwords.
+7. Replace any Heroicons/Lucide with custom SVGs, glyphs, or DNA-system-appropriate icons.
 
-[paste universal AVOID LIST]
+[universal AVOID LIST]
 
-Return only the refactored component.
+Return only the refactored file(s).
 ```
 
 ---
 
-## 4. Portfolio (personal, indie)
+## 3. Hero section only (fast iteration)
 
 ```
-Build a single-page portfolio for [name, role, city].
+Generate ONE hero section. {{DNA}}
 
-VIBE: Editorial magazine + personal blog from 2008 + 2026 polish.
-- System font for body (-apple-system, ui-sans-serif).
-- Big serif drop cap on the intro paragraph.
-- Underlined links, no hover-only states.
-- One real photo of me, treated with subtle grain.
-- Project list as a typographic table, not cards.
-- A "now" section (à la nownownow.com) with what I'm doing this month.
-- Footer with my actual email, no contact form.
-
-Tone: first person, slightly self-deprecating, opinions about my craft.
+Constraints:
+- Headline: max 7 words, in DNA copy tone, in DNA display font.
+- One real photo placeholder (use unsplash with descriptive query, NOT generic).
+- Single CTA, styled per DNA system (e.g. brutalist offset shadow / hairline link / arcade pixel).
+- Signature element from DNA visible.
+- Mobile first, no horizontal scroll.
 
 [universal AVOID LIST]
 ```
 
 ---
 
-## 5. v0.dev starter prompt
-
-v0 tends to default to shadcn-glossy. Force it:
+## 4. Pricing section
 
 ```
-Generate a [hero section / pricing / feature grid] using shadcn/ui ONLY as
-primitives (Button, Card), but override every default style.
+Generate a pricing section. {{DNA}}
 
-Required overrides:
-- Card: remove shadow, add `border-2 border-black`, background #F4EFE6.
-- Button variant="default": override with brutalist offset shadow style.
-- No gradients, no backdrop-blur, no rounded-2xl (use rounded-none).
-- Replace any Lucide icon with a custom inline SVG or a unicode glyph (▲ ◆ ✦ →).
-- Use Fraunces for headings (import from Google Fonts) and Inter for body.
+Per-system rules:
+- swiss-minimal / editorial-magazine: typographic table, no cards, sentence-case plan names.
+- soft-brutalism / raw-brutalism: 1px borders + offset shadow on the recommended plan.
+- terminal-cli: render as `[ FREE ] [ PRO ] [ TEAM ]` ASCII boxes.
+- y2k-revival / vaporwave: chrome buttons OK, sparkles OK.
+- luxury-quiet: 2 plans max, prices in display serif, no "Most Popular" badges.
 
-Copy must be first-person and contain one opinion.
+Plan names: avoid "Starter / Pro / Enterprise". Use real-feeling names that match the DNA tone.
+Copy: state what the plan does NOT include — honesty is humanizing.
+
+[universal AVOID LIST]
 ```
 
 ---
 
-## 6. Cursor / Codex inline edit prompt
+## 5. v0.dev / Lovable / Bolt prompt (overrides shadcn defaults)
 
-When editing a single component:
+```
+Use shadcn/ui ONLY as primitives (Button, Card, Input). Override every default style.
+
+═══ DNA ═══
+{{DNA}}
+═══════════
+
+Required overrides:
+- Card: remove default shadow + radius, apply DNA surface treatment.
+- Button default variant: apply DNA system's button recipe (read references/design-systems.md).
+- No Lucide icons → replace with inline SVG, unicode glyph (▲ ◆ ✦ →), or DNA-appropriate.
+- Fonts: replace Inter/Geist defaults with DNA typography pair (Google Fonts).
+- Background: replace bg-background with DNA palette bg.
+
+Copy in DNA tone, first person, one strong opinion.
+
+[universal AVOID LIST]
+```
+
+---
+
+## 6. Cursor / Codex inline edit
 
 ```
 @file: components/Hero.tsx
-Apply humanized-frontend skill rules:
-- kill gradient, use solid warm bg
-- serif headline, oversized, leading-[0.9]
-- brutalist CTA with offset shadow
-- break symmetry on hero image
-- rewrite copy: first person, no em dashes, one opinion
-Keep props and types unchanged.
+@skill: humanized-frontend
+@dna: {{DNA inline or path to dna-output.md}}
+
+Apply DNA exactly. Keep props/types. Return diff only.
 ```
 
 ---
 
-## 7. Midjourney / Flux (illustrations & photos)
+## 7. Iterate-with-restraint prompt ("don't dump 200 lines")
 
-For hand-drawn icons:
 ```
-hand-drawn icon, single weight ink line, slightly wobbly, on cream paper background,
+Look at the current state of [file]. Score it 0–10 on "matches DNA".
+Then list the top 5 deviations from DNA.
+Propose a refactor for #1 only. Wait for me to approve before #2.
+```
+
+---
+
+## 8. Midjourney / Flux — DNA-aware imagery
+
+For hero photo (real-feeling):
+```
+candid documentary photo, [DNA palette name] color grading, natural light,
+slight 35mm film grain, slightly off-center composition, no posed smiling at camera,
+real workspace context, --ar 4:5 --style raw --v 6
+```
+
+For hand-drawn icons (when DNA system is soft-brutalism / handmade-zine / organic-eco):
+```
+single-weight ink line icon, slightly wobbly hand drawn, on [DNA bg color] paper,
 risograph print feel, no shading, no color fill, minimal, 1024x1024 --style raw --v 6
 ```
 
-For founder photo (if no real one available — last resort):
+For background texture:
 ```
-candid documentary photo of [description], natural window light, slight film grain,
-35mm, slightly off-center composition, no smiling at camera, lived-in workspace, --ar 4:5
+seamless texture of [paper / concrete / linen / blueprint grid / halftone],
+subtle, scannable, 2048x2048, no logo, no watermark
 ```
 
 ---
 
-## 8. Iteration prompt ("make it more human")
+## 9. Re-roll DNA (when the first one doesn't fit)
+
+If the agent / user doesn't love the DNA, re-roll instead of compromising:
+```bash
+bash scripts/dna.sh <niche>           # new random
+bash scripts/dna.sh <niche> 7         # try a new explicit seed
+bash scripts/dna.sh auto              # let DNA pick the niche too
+```
+
+Generate 3 DNAs, pick the strongest, then build. **Do not blend two DNAs.**
+
+---
+
+## 10. Audit prompt (final QC)
 
 ```
-Look at the current state of [file]. Score it 0–10 on "feels hand-made vs feels AI-generated".
-Then list the top 5 things making it feel AI-generated.
-Then propose a refactor for each, one at a time, and apply only #1.
-Wait for me to approve before #2.
+Run `bash scripts/audit.sh <output-dir>`. Report the score and every ✗.
+For each ✗, propose the minimal fix that respects the locked DNA.
+Apply fixes one by one with my approval.
 ```
-
-This forces the agent to slow down and not vibe-dump 200 lines of glossy code.
