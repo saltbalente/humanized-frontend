@@ -1,10 +1,10 @@
 ---
 name: humanized-frontend
-description: "Anti-vibe-coded frontend design system with a Design DNA engine that produces a UNIQUE design every run (25 systems × 50 palettes × 40 type pairings × 30+ niche playbooks = 10B+ combos). Use when building, designing, reviewing or refactoring websites, landing pages, SaaS, portfolios, e-commerce, dashboards, blogs in any stack (HTML, React, Next.js, Vue, Svelte, Tailwind, shadcn/ui). Triggers: humanize UI, anti-AI design, unique landing, niche-aware design, fintech site, wellness site, indie hacker site, crypto site, restaurant site, dev-tool site, brutalism, editorial, swiss minimal, art deco, y2k, terminal UI, organic eco, kinfolk, vaporwave, japanese ma, riso print, blueprint, monochrome noir, replace heroicons, kill purple gradient, humanize copy, em dash removal, real testimonials, audit ai look. Output is always opinionated, niche-appropriate and visually distinct from any other site this skill has produced. Includes prompts for Claude Code, Codex, Cursor, v0, Lovable, Bolt."
+description: "Anti-vibe-coded frontend design system with a Design DNA engine that produces a UNIQUE design every run (25 systems × 50 palettes × 40 type pairings × 44 niche playbooks = 10B+ combos). Use when building, designing, reviewing or refactoring websites, landing pages, SaaS, portfolios, e-commerce, dashboards, blogs in any stack (HTML, React, Next.js, Vue, Svelte, Tailwind, shadcn/ui). Triggers: humanize UI, anti-AI design, unique landing, niche-aware design, fintech site, wellness site, indie hacker site, crypto site, restaurant site, dev-tool site, brutalism, editorial, swiss minimal, art deco, y2k, terminal UI, organic eco, kinfolk, vaporwave, japanese ma, riso print, blueprint, monochrome noir, replace heroicons, kill purple gradient, humanize copy, em dash removal, real testimonials, audit ai look, accessibility humanized, focus states, prefers-reduced-motion, contrast WCAG, mobile touch feel, touch targets, safe-area, soul pass, micro-imperfections, signature element, founder anecdote. Output is always opinionated, niche-appropriate, accessible, mobile-tactile, and visually distinct from any other site this skill has produced. Includes prompts for Claude Code, Codex, Cursor, v0, Lovable, Bolt."
 argument-hint: "[dna|brief|audit|prompt|review|build] <niche or path>"
 license: MIT
 author: Edwar Bechara
-version: 2.0.0
+version: 2.1.0
 ---
 
 # Humanized Frontend — Anti-Vibe-Coded Design Skill
@@ -77,23 +77,28 @@ Fill [assets/brief-template.md](./assets/brief-template.md). Combine with the DN
 4. Use [assets/tailwind-humanized-config.md](./assets/tailwind-humanized-config.md) as a Tailwind starter (swap colors/fonts to DNA values).
 
 ### Phase 3 — Copy
-Apply [references/copywriting-humanizer.md](./references/copywriting-humanizer.md). Tone = DNA's copy-tone slot.
+Apply [references/copywriting-humanizer.md](./references/copywriting-humanizer.md) (12 universal rules, 2026 cliché detector, before/after library, 12 tone recipes mapped to DNA, rules per product type B2B/B2C/indie/creative, founder-anecdote framework, rhythm patterns). Tone = DNA's copy-tone slot.
 
 ### Phase 4 — Code Generation
-Use [references/prompts-library.md](./references/prompts-library.md). Every prompt has a `{{DNA}}` placeholder — paste the Phase 0 output there.
+Use [references/prompts-library.md](./references/prompts-library.md). Every prompt has a `{{DNA}}` placeholder — paste the Phase 0 output there. Bake [references/accessibility-humanized.md](./references/accessibility-humanized.md) and [references/mobile-touch-feel.md](./references/mobile-touch-feel.md) into the prompt as constraints.
 
 ### Phase 5 — Manual Soul Pass (no AI, 30–60 min)
-- Add the **signature element** from DNA. This is non-negotiable.
-- Nudge 2–3 elements off-grid by 4–8px.
-- Insert one real photo or hand-drawn SVG.
-- Add one easter egg or inside joke for the audience.
-- Re-write the hero headline out loud in your voice.
+Follow the full ritual in [references/soul-pass-guide.md](./references/soul-pass-guide.md):
+- Place the **signature element** from DNA (see per-signature placement guide).
+- Apply at least **6 of 10 micro-imperfections** (rotation, off-grid nudge, inconsistent radii, variable line-height, asymmetric padding, hand-tweaked sizes, etc.).
+- Add one real photo, one founder anecdote, one real number, one easter egg.
+- Apply custom easings + irregular delays (no linear stagger).
+- Verify [accessibility-humanized.md](./references/accessibility-humanized.md): focus-visible, contrast, reduced-motion, keyboard nav, semantic HTML.
+- Verify [mobile-touch-feel.md](./references/mobile-touch-feel.md): 44px targets, active states, safe-areas, scroll-snap, correct inputmode.
 
 ### Phase 6 — Anti-Vibe-Coded Audit
 ```bash
-bash scripts/audit.sh <path>
+bash scripts/audit.sh <path>            # quick scan
+bash scripts/audit.sh <path> --fix      # prioritized fixes
+bash scripts/audit.sh <path> --report report.md   # MD report
+bash scripts/audit.sh <path> --json     # CI-friendly
 ```
-Score must be ≥80. Cross-check with [references/anti-ai-checklist.md](./references/anti-ai-checklist.md).
+8 categories scored (Color · Layout · Typography · Iconography · Copy · Imperfection · Personality · A11y) totalling 110 pts. Verdict thresholds: ≥85% ship · ≥70% minor polish · ≥50% one more pass · <50% restart from Phase 0. Cross-check with [references/anti-ai-checklist.md](./references/anti-ai-checklist.md).
 
 ---
 
@@ -152,7 +157,10 @@ Dependencies: `bash` (3.2+, macOS default works) + `grep`. No Python, no npm.
 - [references/design-systems.md](./references/design-systems.md) — 25 design systems
 - [references/niche-playbooks.md](./references/niche-playbooks.md) — 30+ niche conventions + signature elements
 - [references/design-principles.md](./references/design-principles.md) — universal anti-AI principles
-- [references/copywriting-humanizer.md](./references/copywriting-humanizer.md) — voice & copy rules
+- [references/copywriting-humanizer.md](./references/copywriting-humanizer.md) — 12 rules, cliché detector, before/after, tone recipes, founder anecdote
+- [references/soul-pass-guide.md](./references/soul-pass-guide.md) — Phase 5 ritual: signature placement, 10 micro-imperfections, custom easings
+- [references/accessibility-humanized.md](./references/accessibility-humanized.md) — creative focus states, real contrast, reduced-motion, keyboard nav
+- [references/mobile-touch-feel.md](./references/mobile-touch-feel.md) — 44px targets, active states, safe-areas, mobile typography, scroll-snap
 - [references/anti-ai-checklist.md](./references/anti-ai-checklist.md) — pre-publish audit
 - [references/prompts-library.md](./references/prompts-library.md) — DNA-aware prompts for Claude/Codex/Cursor/v0
 - [assets/brief-template.md](./assets/brief-template.md) — strategy brief
