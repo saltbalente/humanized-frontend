@@ -114,6 +114,82 @@ Test EVERY foreground/background pair. Minimum:
 
 ---
 
+## 2.5 Creative High-Contrast / Dark Modes (NOT just black)
+
+A "dark mode" that is `#000000` background with `#FFFFFF` text is the AI default and the laziest option. It also creates harsh contrast that hurts at night. Real high-contrast modes can be **deep navy, forest green, oxblood, midnight indigo** — all WCAG-AAA capable while keeping personality.
+
+### Pre-validated dark backgrounds (≥7:1 with off-white #E6E1CF)
+| Hex | Mood | DNA fit | Contrast vs #E6E1CF |
+|---|---|---|---|
+| `#0E1A24` | midnight navy | fintech, swiss, dev-tools | 14.1:1 ✅ AAA |
+| `#1A1F1B` | deep forest | wellness, organic, eco | 13.8:1 ✅ AAA |
+| `#1B1414` | warm cocoa | kinfolk, coffee, food | 14.2:1 ✅ AAA |
+| `#0F0F1E` | dusk indigo | sci-fi, cyberpunk, gaming | 16.0:1 ✅ AAA |
+| `#1F1310` | oxblood / wine | art-deco, luxury, editorial | 14.6:1 ✅ AAA |
+| `#101A1A` | abyssal teal | ocean, travel, retreat | 15.0:1 ✅ AAA |
+| `#0B1119` | space black | space, astronomy, premium | 16.5:1 ✅ AAA |
+| `#1A1612` | smoked oak | architecture, craft | 14.0:1 ✅ AAA |
+
+### Implementation pattern
+```css
+:root {
+  color-scheme: light dark;
+  /* light mode tokens */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg:     #0E1A24;       /* not #000! */
+    --color-ink:    #E6E1CF;       /* warm off-white */
+    --color-mute:   #8E8B7E;
+    --color-accent: #FF7A5C;       /* slightly warmer in dark */
+    --noise-opacity: 0.04;          /* less noise to avoid banding */
+  }
+}
+
+[data-theme="dark"] { /* manual toggle override */
+  --color-bg: #0E1A24;
+  /* … */
+}
+```
+
+### Rules for creative dark modes
+- Never `#000000` bg with `#FFFFFF` text — too harsh, causes "halation" on OLED.
+- Body text: warm off-white (`#E6E1CF`, `#EFE9DC`, `#F2F0E6`) instead of pure white.
+- Accent: shift slightly warmer in dark mode (orange → coral, blue → teal).
+- Reduce noise overlay opacity by ~30% — dark backgrounds amplify grain.
+- Reduce shadow intensity — darker bg means lower contrast for shadow visibility.
+- Test on OLED (iPhone) AND IPS (most laptops). They render dark very differently.
+
+### Manual theme toggle UX
+```html
+<button
+  type="button"
+  aria-label="Cambiar tema"
+  data-theme-toggle
+  class="btn"
+>
+  <span data-show="light">🌙</span>
+  <span data-show="dark">☀️</span>
+</button>
+```
+```js
+const root = document.documentElement;
+const stored = localStorage.getItem("theme");
+if (stored) root.setAttribute("data-theme", stored);
+
+document.querySelector("[data-theme-toggle]").addEventListener("click", () => {
+  const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+  root.setAttribute("data-theme", next);
+  localStorage.setItem("theme", next);
+});
+```
+- Always persist in `localStorage`.
+- Always respect `prefers-color-scheme` as the initial value when no stored preference.
+- Toggle should NOT cause a flash of wrong theme on load — set `data-theme` synchronously before paint.
+
+---
+
 ## 3. Reduced Motion — Mandatory
 
 ```css

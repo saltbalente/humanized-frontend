@@ -1,0 +1,342 @@
+/* ========================================================================
+   humanized-frontend :: Design Tokens (drop-in CSS variables)
+   v2.2.0 — load this BEFORE your CSS to inherit a humanized look everywhere.
+
+   Strategy: every value is a token. AI cannot drift if there is no raw value
+   to invent. When you ask "create a new section", the AI will reuse these
+   tokens because they're declared on :root.
+
+   How to use:
+     1) Run `bash scripts/dna.sh <niche>` and paste the 4 hex colors,
+        2 fonts, and signature into the marked blocks below.
+     2) Import this file FIRST in your global CSS / layout.
+     3) In Tailwind: extend theme via the same var names (see SECTION Z).
+     4) Tell the AI in EVERY prompt: "use the CSS variables defined in
+        design-tokens.css. Do NOT hardcode colors, sizes, shadows or fonts."
+
+   This file is intentionally STRICT. Add new tokens by editing here, never
+   inline.
+   ======================================================================== */
+
+:root {
+
+  /* ─── 1. PALETTE (paste from dna.sh) ───────────────────────────────── */
+  --color-bg:      #F4EFE6;   /* warm-paper        ← REPLACE with DNA #1 */
+  --color-ink:     #1A1A1A;   /* deep-charcoal     ← REPLACE with DNA #2 */
+  --color-mute:    #8A8278;   /* clay-mid          ← REPLACE with DNA #3 */
+  --color-accent:  #FF5C39;   /* persimmon         ← REPLACE with DNA #4 */
+
+  /* derived (don't edit unless you understand opacity stacking) */
+  --color-bg-soft:    color-mix(in oklab, var(--color-bg) 92%, var(--color-ink));
+  --color-bg-strong:  color-mix(in oklab, var(--color-bg) 84%, var(--color-ink));
+  --color-ink-soft:   color-mix(in oklab, var(--color-ink) 78%, var(--color-bg));
+  --color-accent-soft:color-mix(in oklab, var(--color-accent) 80%, var(--color-bg));
+  --color-accent-deep:color-mix(in oklab, var(--color-accent) 78%, var(--color-ink));
+
+  /* semantic */
+  --color-success: #2E7D5B;
+  --color-warning: #C77700;
+  --color-danger:  #B3261E;
+  --color-info:    #2C5DA1;
+
+  /* ─── 2. TYPOGRAPHY (paste from dna.sh) ────────────────────────────── */
+  --font-display: "Fraunces", "Playfair Display", Georgia, serif;     /* ← REPLACE */
+  --font-body:    "Inter", "Helvetica Neue", system-ui, sans-serif;   /* ← REPLACE */
+  --font-mono:    "JetBrains Mono", ui-monospace, "Menlo", monospace;
+  --font-hand:    "Caveat", "Kalam", cursive;  /* for margin notes */
+
+  /* fluid type scale (clamp(min, fluid, max)) */
+  --text-xs:    clamp(0.75rem, 0.71rem + 0.18vw, 0.85rem);
+  --text-sm:    clamp(0.875rem, 0.84rem + 0.2vw, 0.95rem);
+  --text-base:  clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+  --text-lg:    clamp(1.125rem, 1.05rem + 0.4vw, 1.35rem);
+  --text-xl:    clamp(1.375rem, 1.25rem + 0.6vw, 1.75rem);
+  --text-2xl:   clamp(1.75rem, 1.5rem + 1vw, 2.5rem);
+  --text-3xl:   clamp(2.25rem, 1.75rem + 2vw, 3.75rem);
+  --text-4xl:   clamp(2.75rem, 2rem + 3vw, 5rem);
+  --text-5xl:   clamp(3.5rem, 2.4rem + 4.5vw, 7rem);
+  --text-hero:  clamp(3.5rem, 2rem + 7vw, 9rem);
+
+  --leading-tight:    1.05;
+  --leading-snug:     1.2;
+  --leading-base:     1.55;   /* irregular: NOT 1.5, slight breathing */
+  --leading-relaxed:  1.7;
+  --leading-loose:    2;
+
+  --tracking-tight:    -0.02em;
+  --tracking-base:     0;
+  --tracking-wide:     0.02em;
+  --tracking-display:  -0.04em;
+  --tracking-mono:     -0.01em;
+
+  /* ─── 3. SPACING (8px base, but with hand-feel jumps) ──────────────── */
+  --space-0:   0;
+  --space-px:  1px;
+  --space-1:   0.25rem;   /* 4 */
+  --space-2:   0.5rem;    /* 8 */
+  --space-3:   0.75rem;   /* 12 */
+  --space-4:   1rem;      /* 16 */
+  --space-5:   1.5rem;    /* 24 */
+  --space-6:   2rem;      /* 32 */
+  --space-7:   3rem;      /* 48 */
+  --space-8:   4rem;      /* 64 */
+  --space-9:   6rem;      /* 96 */
+  --space-10:  8rem;      /* 128 */
+  --space-11:  12rem;     /* 192 */
+
+  /* irregular: use these to nudge off-grid (for soul pass) */
+  --nudge-1: 3px;
+  --nudge-2: 6px;
+  --nudge-3: 11px;
+  --nudge-4: 17px;
+
+  /* container widths */
+  --container-prose:  65ch;
+  --container-narrow: 48rem;
+  --container-base:   72rem;
+  --container-wide:   90rem;
+
+  /* ─── 4. RADII (varied, not a single rounded-2xl) ──────────────────── */
+  --radius-none:  0;
+  --radius-xs:    2px;
+  --radius-sm:    4px;
+  --radius-md:    8px;
+  --radius-lg:    14px;
+  --radius-xl:    22px;
+  --radius-pill:  9999px;
+  /* DNA-default: pick ONE primary in your project, then use 1-2 others
+     intentionally for contrast. Default radius depends on DNA system:
+       brutalism / swiss / editorial = --radius-none
+       kinfolk / wellness            = --radius-md
+       y2k / playful                 = --radius-lg
+       glassmorphism / sci-fi        = --radius-xl
+  */
+  --radius-default: var(--radius-sm);
+
+  /* ─── 5. SHADOWS (layered — see references/texture-and-shadows.md) ── */
+  --shadow-none: none;
+
+  --shadow-xs:
+    0 1px 1px rgba(15, 12, 10, 0.04);
+
+  --shadow-soft:
+    0 1px 2px rgba(15, 12, 10, 0.04),
+    0 4px 8px rgba(15, 12, 10, 0.06),
+    0 16px 32px rgba(15, 12, 10, 0.08);
+
+  --shadow-studio:
+    0 2px 4px rgba(0, 0, 0, 0.06),
+    0 8px 16px rgba(0, 0, 0, 0.08),
+    0 24px 48px rgba(0, 0, 0, 0.10),
+    0 48px 96px rgba(0, 0, 0, 0.06);
+
+  --shadow-float:
+    0 0 0 1px rgba(0, 0, 0, 0.04),
+    0 4px 8px rgba(0, 0, 0, 0.04),
+    0 24px 48px rgba(0, 0, 0, 0.12),
+    0 56px 112px rgba(0, 0, 0, 0.08);
+
+  --shadow-brut:
+    4px 4px 0 var(--color-ink);
+
+  --shadow-brut-color:
+    6px 6px 0 var(--color-accent);
+
+  --shadow-inset:
+    inset 0 1px 2px rgba(0, 0, 0, 0.06),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.04);
+
+  --shadow-glow:
+    0 0 0 1px var(--color-accent),
+    0 0 24px color-mix(in oklab, var(--color-accent) 50%, transparent),
+    0 0 64px color-mix(in oklab, var(--color-accent) 20%, transparent);
+
+  --shadow-default: var(--shadow-soft);
+
+  /* ─── 6. MOTION (see references/motion-physics.md) ─────────────────── */
+  --ease-spring:     cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-soft:       cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-snap:       cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-organic:    cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-anticipate: cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  --ease-magnetic:   cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-thud:       cubic-bezier(0.83, 0, 0.17, 1);
+  --ease-default:    var(--ease-soft);
+
+  --dur-instant: 80ms;
+  --dur-quick:   180ms;
+  --dur-base:    240ms;
+  --dur-slow:    420ms;
+  --dur-cinema:  720ms;
+
+  /* ─── 7. BORDERS / RULES ───────────────────────────────────────────── */
+  --border-hair:    1px solid color-mix(in oklab, var(--color-ink) 12%, var(--color-bg));
+  --border-strong:  1px solid var(--color-ink);
+  --border-thick:   2px solid var(--color-ink);
+  --border-brutal:  3px solid var(--color-ink);
+  --border-accent:  2px solid var(--color-accent);
+  --border-dashed:  1.5px dashed var(--color-ink);
+
+  /* ─── 8. NOISE / TEXTURE ───────────────────────────────────────────── */
+  --noise-opacity: 0.06;     /* tune per DNA, see texture-and-shadows.md */
+  --noise-svg: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.6 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+
+  /* ─── 9. Z-INDEX (curated, no z-9999 chaos) ────────────────────────── */
+  --z-base:     0;
+  --z-raised:   10;
+  --z-sticky:   100;
+  --z-dropdown: 200;
+  --z-modal:    400;
+  --z-toast:    600;
+  --z-overlay:  9000;  /* noise overlay */
+
+  /* ─── 10. FOCUS RING (creative, see accessibility-humanized.md) ────── */
+  --focus-color:  var(--color-accent);
+  --focus-width:  3px;
+  --focus-offset: 3px;
+  --focus-shadow: 0 0 0 var(--focus-offset) var(--color-bg),
+                  0 0 0 calc(var(--focus-offset) + var(--focus-width)) var(--focus-color);
+}
+
+/* ─── DARK MODE (creative, not just black) ───────────────────────────── */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Pick ONE creative dark, not pure black:
+       --color-bg: #0E1A24;  ← deep midnight blue
+       --color-bg: #1A1F1B;  ← forest dark
+       --color-bg: #1B1414;  ← warm cocoa
+       --color-bg: #14181F;  ← dusk navy
+       (always ≥4.5:1 contrast vs --color-ink which becomes off-white)
+    */
+    --color-bg:     #0E1A24;
+    --color-ink:    #E6E1CF;
+    --color-mute:   #8E8B7E;
+    --color-accent: #FF7A5C;  /* often slightly warmer in dark mode */
+
+    --noise-opacity: 0.04;     /* less noise in dark, prevents banding */
+    --shadow-default: 0 1px 2px rgba(0,0,0,0.4),
+                      0 8px 24px rgba(0,0,0,0.35),
+                      0 24px 48px rgba(0,0,0,0.25);
+  }
+}
+
+[data-theme="dark"] {
+  --color-bg:     #0E1A24;
+  --color-ink:    #E6E1CF;
+  --color-mute:   #8E8B7E;
+  --color-accent: #FF7A5C;
+  --noise-opacity: 0.04;
+}
+
+/* ─── BASELINE STYLES (apply tokens automatically) ───────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--color-ink);
+  background: var(--color-bg);
+  line-height: var(--leading-base);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+body { margin: 0; min-height: 100vh; }
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  letter-spacing: var(--tracking-display);
+  line-height: var(--leading-tight);
+  margin: 0;
+}
+h1 { font-size: var(--text-hero);   }
+h2 { font-size: var(--text-3xl);    }
+h3 { font-size: var(--text-2xl);    }
+h4 { font-size: var(--text-xl);     }
+
+p  { max-width: var(--container-prose); margin: 0 0 var(--space-4); }
+
+a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 0.2em;
+  transition: color var(--dur-quick) var(--ease-default);
+}
+a:hover { color: var(--color-accent); }
+
+code, pre, kbd, samp {
+  font-family: var(--font-mono);
+  letter-spacing: var(--tracking-mono);
+  font-size: 0.92em;
+}
+
+button, .btn {
+  font: inherit;
+  cursor: pointer;
+  border: var(--border-strong);
+  background: var(--color-ink);
+  color: var(--color-bg);
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--radius-default);
+  box-shadow: var(--shadow-brut);
+  transition:
+    transform var(--dur-quick) var(--ease-spring),
+    box-shadow var(--dur-quick) var(--ease-soft);
+  touch-action: manipulation;
+  min-height: 44px;
+}
+button:hover, .btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--color-ink);
+}
+button:active, .btn:active {
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0 var(--color-ink);
+  transition-duration: var(--dur-instant);
+}
+
+/* universal focus ring (creative, visible) */
+:focus-visible {
+  outline: var(--focus-width) solid var(--focus-color);
+  outline-offset: var(--focus-offset);
+  border-radius: var(--radius-xs);
+}
+
+/* page-wide noise overlay */
+body::after {
+  content: "";
+  position: fixed; inset: 0;
+  pointer-events: none;
+  z-index: var(--z-overlay);
+  opacity: var(--noise-opacity);
+  background-image: var(--noise-svg);
+  mix-blend-mode: overlay;
+}
+
+/* respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ────────────────────────────────────────────────────────────────────── */
+/* SECTION Z — Tailwind v4 / shadcn bridge                                */
+/* If using Tailwind, add this to your tailwind.config or @theme block:   */
+/*                                                                        */
+/* @theme {                                                               */
+/*   --color-bg:     var(--color-bg);                                     */
+/*   --color-ink:    var(--color-ink);                                    */
+/*   --color-accent: var(--color-accent);                                 */
+/*   --font-display: var(--font-display);                                 */
+/*   --font-body:    var(--font-body);                                    */
+/*   --shadow-card:  var(--shadow-soft);                                  */
+/*   --ease-spring:  var(--ease-spring);                                  */
+/* }                                                                      */
+/*                                                                        */
+/* Then use: bg-[--color-bg], text-[--color-ink], shadow-[--shadow-soft]. */
+/* ────────────────────────────────────────────────────────────────────── */

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# humanized-frontend :: Anti-Vibe-Coded Audit (v2.1)
+# humanized-frontend :: Anti-Vibe-Coded Audit (v2.2)
 # Categorized score, Markdown report, optional --fix recommendations.
 #
 # Usage:
@@ -86,7 +86,7 @@ cat_init "IMPERFECTION" 10
 cat_init "PERSONALITY"  10
 cat_init "A11Y"         10
 
-echo "${B}humanized-frontend audit v2.1${N} :: ${B}$TARGET${N}"
+echo "${B}humanized-frontend audit v2.2${N} :: ${B}$TARGET${N}"
 echo "─────────────────────────────────────────────────────────────"
 
 # ╔══ COLOR
@@ -103,6 +103,8 @@ scan COLOR "pure black text"                 'text-black\b|color:\s*#000(000)?\b
 "Use ink color from DNA (#1A1A1A, #0A0A0A, #1B262C) for warmth. #000 is harsh."
 scan COLOR "shadcn default chart palette"    '\bchart-1\b|\bchart-2\b|\bchart-3\b|hsl\(var\(--chart-' 2 \
 "Override shadcn chart colors with your DNA palette."
+scan COLOR "hardcoded #fff / #000 (use tokens)" '#(fff|FFF|000)([^a-fA-F0-9]|$)|#(ffffff|FFFFFF|000000)\b' 2 \
+"Replace hardcoded colors with var(--color-bg) / var(--color-ink). See assets/design-tokens.css."
 
 # ╔══ LAYOUT
 echo; echo "${B}▸ Layout (max 15)${N}"
@@ -116,6 +118,8 @@ scan LAYOUT "soft elevation shadows"          'shadow-(lg|xl|2xl|inner)\b' 2 \
 "Soft Material shadows = AI default. Use hard offset shadow [4px_4px_0_#000] or remove."
 scan LAYOUT "everything text-center spam"     'text-center.*text-center.*text-center.*text-center' 1 \
 "Break symmetry. Mix text-left, text-center, off-center placement."
+scan LAYOUT "single-layer Tailwind shadow defaults" '\bshadow-(sm|md|lg|xl|2xl)\b' 1 \
+"Use layered shadows from design-tokens.css (--shadow-soft/studio/float/brut). See texture-and-shadows.md."
 
 # ╔══ TYPOGRAPHY
 echo; echo "${B}▸ Typography (max 15)${N}"
@@ -158,11 +162,15 @@ echo; echo "${B}▸ Imperfection (max 10)${N}"
 HAS_ROTATE=$(eval grep -REl $GREP_INC -E '(rotate-\[?-?[0-9])|transform.*rotate' \"$TARGET\" 2>/dev/null | head -1)
 HAS_OFFSET_SHADOW=$(eval grep -REl $GREP_INC -E 'shadow-\[[0-9]+px[_ ][0-9]+px[_ ]0' \"$TARGET\" 2>/dev/null | head -1)
 HAS_HANDDRAWN=$(eval grep -REl $GREP_INC -E '(hand-drawn|handwritten|font-(hand|cursive|caveat))' \"$TARGET\" 2>/dev/null | head -1)
-HAS_NOISE=$(eval grep -REl $GREP_INC -E '(noise|grain|texture|paper)' \"$TARGET\" 2>/dev/null | head -1)
-[[ -z "$HAS_ROTATE" ]]        && { printf "  ${R}✗${N} [IMPERFECTION] no rotated elements (asymmetry)              ${Y}-3${N}\n"; cat_hit IMPERFECTION 3; HIT_CAT+=(IMPERFECTION); HIT_LABEL+=("no rotated elements"); HIT_COUNT+=("0"); HIT_FIX+=("Add rotate-[-0.6deg] or rotate-[1deg] to at least one card or photo."); HIT_SAMPLE+=(""); } || printf "  ${G}✓${N} [IMPERFECTION] rotated/asymmetric elements present\n"
+HAS_NOISE=$(eval grep -REl $GREP_INC -E '(noise|grain|texture|paper|fractalNoise|feTurbulence)' \"$TARGET\" 2>/dev/null | head -1)
+HAS_CUSTOM_EASE=$(eval grep -REl $GREP_INC -E 'cubic-bezier\(' \"$TARGET\" 2>/dev/null | head -1)
+HAS_TOKENS=$(eval grep -REl $GREP_INC -E 'var\(--color-|var\(--space-|var\(--shadow-|var\(--ease-' \"$TARGET\" 2>/dev/null | head -1)
+[[ -z "$HAS_ROTATE" ]]        && { printf "  ${R}✗${N} [IMPERFECTION] no rotated elements (asymmetry)              ${Y}-2${N}\n"; cat_hit IMPERFECTION 2; HIT_CAT+=(IMPERFECTION); HIT_LABEL+=("no rotated elements"); HIT_COUNT+=("0"); HIT_FIX+=("Add rotate-[-0.6deg] or rotate-[1deg] to at least one card or photo."); HIT_SAMPLE+=(""); } || printf "  ${G}✓${N} [IMPERFECTION] rotated/asymmetric elements present\n"
 [[ -z "$HAS_OFFSET_SHADOW" ]] && { printf "  ${R}✗${N} [IMPERFECTION] no brutalist offset shadow                  ${Y}-2${N}\n"; cat_hit IMPERFECTION 2; HIT_CAT+=(IMPERFECTION); HIT_LABEL+=("no offset shadow"); HIT_COUNT+=("0"); HIT_FIX+=("Use shadow-[4px_4px_0_#000] for at least one element instead of shadow-xl."); HIT_SAMPLE+=(""); } || printf "  ${G}✓${N} [IMPERFECTION] brutalist offset shadow used\n"
-[[ -z "$HAS_HANDDRAWN" ]]     && { printf "  ${R}✗${N} [IMPERFECTION] no hand-drawn / handwritten element         ${Y}-3${N}\n"; cat_hit IMPERFECTION 3; HIT_CAT+=(IMPERFECTION); HIT_LABEL+=("no hand-drawn element"); HIT_COUNT+=("0"); HIT_FIX+=("Add a hand-drawn SVG arrow, a Caveat-font margin note, or a sketch."); HIT_SAMPLE+=(""); } || printf "  ${G}✓${N} [IMPERFECTION] hand-drawn / handwritten present\n"
-[[ -z "$HAS_NOISE" ]]         && { printf "  ${R}✗${N} [IMPERFECTION] no texture / grain / paper background       ${Y}-2${N}\n"; cat_hit IMPERFECTION 2; HIT_CAT+=(IMPERFECTION); HIT_LABEL+=("no texture/grain"); HIT_COUNT+=("0"); HIT_FIX+=("Add a noise SVG overlay (5-8% opacity) or paper background. See assets/tailwind-humanized-config.md."); HIT_SAMPLE+=(""); } || printf "  ${G}✓${N} [IMPERFECTION] texture / grain present\n"
+[[ -z "$HAS_HANDDRAWN" ]]     && { printf "  ${R}✗${N} [IMPERFECTION] no hand-drawn / handwritten element         ${Y}-2${N}\n"; cat_hit IMPERFECTION 2; HIT_CAT+=(IMPERFECTION); HIT_LABEL+=("no hand-drawn element"); HIT_COUNT+=("0"); HIT_FIX+=("Add a hand-drawn SVG arrow, a Caveat-font margin note, or a sketch."); HIT_SAMPLE+=(""); } || printf "  ${G}✓${N} [IMPERFECTION] hand-drawn / handwritten present\n"
+[[ -z "$HAS_NOISE" ]]         && { printf "  ${R}✗${N} [IMPERFECTION] no texture / grain / paper background       ${Y}-2${N}\n"; cat_hit IMPERFECTION 2; HIT_CAT+=(IMPERFECTION); HIT_LABEL+=("no texture/grain"); HIT_COUNT+=("0"); HIT_FIX+=("Add a noise SVG overlay (5-8% opacity). See references/texture-and-shadows.md."); HIT_SAMPLE+=(""); } || printf "  ${G}✓${N} [IMPERFECTION] texture / grain present\n"
+[[ -z "$HAS_CUSTOM_EASE" ]]   && { printf "  ${R}✗${N} [IMPERFECTION] no custom cubic-bezier easing                ${Y}-1${N}\n"; cat_hit IMPERFECTION 1; HIT_CAT+=(IMPERFECTION); HIT_LABEL+=("no custom easing"); HIT_COUNT+=("0"); HIT_FIX+=("Replace ease-in-out with cubic-bezier from references/motion-physics.md (e.g. --ease-spring)."); HIT_SAMPLE+=(""); } || printf "  ${G}✓${N} [IMPERFECTION] custom cubic-bezier easing in use\n"
+[[ -z "$HAS_TOKENS" ]]        && { printf "  ${R}✗${N} [IMPERFECTION] no design tokens (CSS variables) in use      ${Y}-1${N}\n"; cat_hit IMPERFECTION 1; HIT_CAT+=(IMPERFECTION); HIT_LABEL+=("no design tokens"); HIT_COUNT+=("0"); HIT_FIX+=("Adopt assets/design-tokens.css and use var(--color-*), var(--space-*), var(--shadow-*)."); HIT_SAMPLE+=(""); } || printf "  ${G}✓${N} [IMPERFECTION] design tokens (CSS variables) in use\n"
 
 # ╔══ PERSONALITY
 echo; echo "${B}▸ Personality (max 10)${N}"
