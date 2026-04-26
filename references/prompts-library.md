@@ -199,3 +199,71 @@ Run `bash scripts/audit.sh <output-dir>`. Report the score and every ✗.
 For each ✗, propose the minimal fix that respects the locked DNA.
 Apply fixes one by one with my approval.
 ```
+
+---
+
+## 11. Variable Fonts Animation (master prompt)
+
+> Full reference: [variable-fonts.md](./variable-fonts.md). This is the prompt to drop into Cursor / Claude / GPT / v0.
+
+```
+Act as a Senior Creative Developer expert in digital typography and fluid design.
+Implement Variable Fonts Animation in this component to give it a unique,
+modern, author-driven visual identity.
+
+═══ DESIGN DNA — TREAT AS CONTRACT ═══
+{{DNA}}
+═══════════════════════════════════════
+
+TECHNICAL REQUIREMENTS:
+
+1. FONT
+   - Use a variable font ONLY (Inter Variable, Geist, Fraunces, Recursive,
+     Bricolage Grotesque, Roboto Flex, or whatever the DNA's typography slot
+     specifies — pick the variable equivalent).
+   - Declare @font-face with `font-weight: 100 900` to enable the full range.
+   - Self-host or use next/font with explicit `axes` option.
+
+2. FLUID TYPOGRAPHY
+   - Configure the type scale with clamp() so font-size responds to viewport
+     without hard breakpoints. Pull values from --text-* tokens in
+     design-tokens.css when present.
+
+3. AXIS ANIMATION (CORE)
+   - You MUST use `font-variation-settings`. NEVER `font-weight: bold` or 700.
+   - Resting:  font-variation-settings: 'wght' 400, 'slnt' 0;
+   - Hover:    transition wght 400→800 AND slnt 0→-8.
+   - Transition: font-variation-settings 0.5s var(--ease-soft, cubic-bezier(0.22,1,0.36,1));
+   - Apply same hover state on :focus-visible (a11y).
+
+4. BREATHING ANIMATION (hero / display only)
+   - Add an infinite, very subtle keyframes that vary wght by ±5% (e.g. 400↔440)
+     over 6-8s. Like breathing.
+   - WRAP in @media (prefers-reduced-motion: no-preference) — never under
+     reduced-motion.
+
+5. AESTHETIC GOAL
+   - Text must feel alive, react like flexible material.
+   - All weight changes through font-variation-settings.
+   - All transitions on font-variation-settings, NOT on font-weight.
+
+6. DESIGN TOKEN INTEGRATION
+   - Use --font-display, --font-body, --ease-soft, --text-* from
+     design-tokens.css. Do NOT hardcode font-family inline.
+
+DELIVERABLE:
+- A single component (HTML+CSS or React or Tailwind arbitrary values).
+- The CSS must demonstrate axis interpolation, fluid sizing, hover, breathing,
+  and reduced-motion respect.
+- Brief comment explaining which axes you animated for THIS font and why.
+```
+
+### Tip for Tailwind users
+Append:
+```
+Use Tailwind v4 arbitrary value syntax for variable axes:
+  [font-variation-settings:'wght'_420,'opsz'_144]
+  hover:[font-variation-settings:'wght'_760,'slnt'_-6]
+  transition-[font-variation-settings] duration-500
+  [transition-timing-function:cubic-bezier(0.22,1,0.36,1)]
+```

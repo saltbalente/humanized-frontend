@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# humanized-frontend :: Anti-Vibe-Coded Audit (v2.2)
+# humanized-frontend :: Anti-Vibe-Coded Audit (v2.3)
 # Categorized score, Markdown report, optional --fix recommendations.
 #
 # Usage:
@@ -86,7 +86,7 @@ cat_init "IMPERFECTION" 10
 cat_init "PERSONALITY"  10
 cat_init "A11Y"         10
 
-echo "${B}humanized-frontend audit v2.2${N} :: ${B}$TARGET${N}"
+echo "${B}humanized-frontend audit v2.3${N} :: ${B}$TARGET${N}"
 echo "─────────────────────────────────────────────────────────────"
 
 # ╔══ COLOR
@@ -131,6 +131,12 @@ scan TYPOGRAPHY "no display font for headings" 'h1.*font-sans|h1.*font-medium\b'
 "Headlines should use display/serif font from DNA, not body sans."
 scan TYPOGRAPHY "tracking-tight on every heading" 'h[1-3].*tracking-tight.*tracking-tight.*tracking-tight' 1 \
 "Variation > consistency. Mix tracking-normal, tracking-wide on different sections."
+scan TYPOGRAPHY "static font-weight bold/700 (use variable axis)" '\bfont-(weight:\s*(bold|700|800|900))|font-bold\b|font-extrabold\b' 2 \
+"Replace with font-variation-settings: 'wght' 700-900 to leverage variable fonts. See references/variable-fonts.md."
+scan TYPOGRAPHY "transition on font-weight (jumps)" 'transition[^;]*font-weight' 1 \
+"Transitioning font-weight gives a hard jump. Transition font-variation-settings instead for smooth interpolation."
+scan TYPOGRAPHY "no fluid type (clamp) detected" 'font-size:\s*[0-9]+(px|rem)\s*;' 1 \
+"Replace fixed font-size with clamp() for fluid responsive type. e.g. clamp(2rem, 1rem + 4vw, 5rem)."
 
 # ╔══ ICONOGRAPHY
 echo; echo "${B}▸ Iconography (max 10)${N}"
@@ -171,6 +177,8 @@ HAS_TOKENS=$(eval grep -REl $GREP_INC -E 'var\(--color-|var\(--space-|var\(--sha
 [[ -z "$HAS_NOISE" ]]         && { printf "  ${R}✗${N} [IMPERFECTION] no texture / grain / paper background       ${Y}-2${N}\n"; cat_hit IMPERFECTION 2; HIT_CAT+=(IMPERFECTION); HIT_LABEL+=("no texture/grain"); HIT_COUNT+=("0"); HIT_FIX+=("Add a noise SVG overlay (5-8% opacity). See references/texture-and-shadows.md."); HIT_SAMPLE+=(""); } || printf "  ${G}✓${N} [IMPERFECTION] texture / grain present\n"
 [[ -z "$HAS_CUSTOM_EASE" ]]   && { printf "  ${R}✗${N} [IMPERFECTION] no custom cubic-bezier easing                ${Y}-1${N}\n"; cat_hit IMPERFECTION 1; HIT_CAT+=(IMPERFECTION); HIT_LABEL+=("no custom easing"); HIT_COUNT+=("0"); HIT_FIX+=("Replace ease-in-out with cubic-bezier from references/motion-physics.md (e.g. --ease-spring)."); HIT_SAMPLE+=(""); } || printf "  ${G}✓${N} [IMPERFECTION] custom cubic-bezier easing in use\n"
 [[ -z "$HAS_TOKENS" ]]        && { printf "  ${R}✗${N} [IMPERFECTION] no design tokens (CSS variables) in use      ${Y}-1${N}\n"; cat_hit IMPERFECTION 1; HIT_CAT+=(IMPERFECTION); HIT_LABEL+=("no design tokens"); HIT_COUNT+=("0"); HIT_FIX+=("Adopt assets/design-tokens.css and use var(--color-*), var(--space-*), var(--shadow-*)."); HIT_SAMPLE+=(""); } || printf "  ${G}✓${N} [IMPERFECTION] design tokens (CSS variables) in use\n"
+HAS_VARFONT=$(eval grep -REl $GREP_INC -E 'font-variation-settings|font-weight:\s*100\s+900|woff2-variations' \"$TARGET\" 2>/dev/null | head -1)
+[[ -z "$HAS_VARFONT" ]]       && { printf "  ${R}✗${N} [IMPERFECTION] no variable-font axis animation             ${Y}-1${N}\n"; cat_hit IMPERFECTION 1; HIT_CAT+=(IMPERFECTION); HIT_LABEL+=("no variable-font axis"); HIT_COUNT+=("0"); HIT_FIX+=("Use font-variation-settings on headings (wght/slnt/opsz). See references/variable-fonts.md."); HIT_SAMPLE+=(""); } || printf "  ${G}✓${N} [IMPERFECTION] variable-font axis animation present\n"
 
 # ╔══ PERSONALITY
 echo; echo "${B}▸ Personality (max 10)${N}"

@@ -1,10 +1,10 @@
 ---
 name: humanized-frontend
-description: "Anti-vibe-coded frontend design system with a Design DNA engine that produces a UNIQUE design every run (25 systems × 50 palettes × 40 type pairings × 44 niche playbooks = 10B+ combos). Use when building, designing, reviewing or refactoring websites, landing pages, SaaS, portfolios, e-commerce, dashboards, blogs in any stack (HTML, React, Next.js, Vue, Svelte, Tailwind, shadcn/ui). Triggers: humanize UI, anti-AI design, unique landing, niche-aware design, fintech site, wellness site, indie hacker site, crypto site, restaurant site, dev-tool site, brutalism, editorial, swiss minimal, art deco, y2k, terminal UI, organic eco, kinfolk, vaporwave, japanese ma, riso print, blueprint, monochrome noir, replace heroicons, kill purple gradient, humanize copy, em dash removal, real testimonials, audit ai look, accessibility humanized, focus states, prefers-reduced-motion, contrast WCAG, creative dark mode, mobile touch feel, touch targets, safe-area, soul pass, micro-imperfections, signature element, founder anecdote, motion physics, framer motion, gsap, springs, stagger, magnetic CTA, layered shadows, grain noise texture, neobrutalism, glassmorphism, design tokens, scalable AI design system, css variables, tailwind v4. Output is always opinionated, niche-appropriate, accessible, mobile-tactile, motion-aware, texture-rich, token-driven and visually distinct from any other site this skill has produced. Includes prompts for Claude Code, Codex, Cursor, v0, Lovable, Bolt."
+description: "Anti-vibe-coded frontend design system with a Design DNA engine that produces a UNIQUE design every run (25 systems × 50 palettes × 40 type pairings × 44 niche playbooks = 10B+ combos). Use when building, designing, reviewing or refactoring websites, landing pages, SaaS, portfolios, e-commerce, dashboards, blogs in any stack (HTML, React, Next.js, Vue, Svelte, Tailwind, shadcn/ui). Triggers: humanize UI, anti-AI design, unique landing, niche-aware design, fintech site, wellness site, indie hacker site, crypto site, restaurant site, dev-tool site, brutalism, editorial, swiss minimal, art deco, y2k, terminal UI, organic eco, kinfolk, vaporwave, japanese ma, riso print, blueprint, monochrome noir, replace heroicons, kill purple gradient, humanize copy, em dash removal, real testimonials, audit ai look, accessibility humanized, focus states, prefers-reduced-motion, contrast WCAG, creative dark mode, mobile touch feel, touch targets, safe-area, soul pass, micro-imperfections, signature element, founder anecdote, motion physics, framer motion, gsap, springs, stagger, magnetic CTA, layered shadows, grain noise texture, neobrutalism, glassmorphism, design tokens, scalable AI design system, css variables, tailwind v4, variable fonts, font-variation-settings, fluid typography, breathing animation, axis interpolation, wght slnt opsz axes, fraunces recursive inter geist. Output is always opinionated, niche-appropriate, accessible, mobile-tactile, motion-aware, texture-rich, token-driven, with living typography, and visually distinct from any other site this skill has produced. Includes prompts for Claude Code, Codex, Cursor, v0, Lovable, Bolt."
 argument-hint: "[dna|brief|audit|prompt|review|build] <niche or path>"
 license: MIT
 author: saltbalente
-version: 2.2.0
+version: 2.3.0
 ---
 
 # Humanized Frontend — Anti-Vibe-Coded Design Skill
@@ -76,7 +76,7 @@ Open [assets/design-tokens.css](./assets/design-tokens.css) and replace the 4 ma
 ### Phase 2 — Visual Design
 1. Open [references/design-systems.md](./references/design-systems.md) and read the section for your DNA system.
 2. Open [references/niche-playbooks.md](./references/niche-playbooks.md) for niche must-haves and signature elements.
-3. Apply the 4-color palette and type pair exactly as DNA specified (now via tokens from Phase 1.5).
+3. Apply the 4-color palette and type pair exactly as DNA specified (now via tokens from Phase 1.5). Pick the **variable** equivalent of every font — see [references/variable-fonts.md](./references/variable-fonts.md) for the per-DNA mapping.
 4. Apply [references/texture-and-shadows.md](./references/texture-and-shadows.md): noise overlay (3-10% per DNA), layered shadows (NOT shadow-xl), per-niche material textures (paper/linen/blueprint/dotgrid/halftone/scanlines).
 5. Use [assets/tailwind-humanized-config.md](./assets/tailwind-humanized-config.md) as a Tailwind starter (swap colors/fonts to DNA values).
 
@@ -84,7 +84,7 @@ Open [assets/design-tokens.css](./assets/design-tokens.css) and replace the 4 ma
 Apply [references/copywriting-humanizer.md](./references/copywriting-humanizer.md) (12 universal rules, 2026 cliché detector, before/after library, 12 tone recipes mapped to DNA, rules per product type B2B/B2C/indie/creative, founder-anecdote framework, rhythm patterns). Tone = DNA's copy-tone slot.
 
 ### Phase 4 — Code Generation
-Use [references/prompts-library.md](./references/prompts-library.md). Every prompt has a `{{DNA}}` placeholder — paste the Phase 0 output there. Bake [references/accessibility-humanized.md](./references/accessibility-humanized.md), [references/mobile-touch-feel.md](./references/mobile-touch-feel.md), [references/motion-physics.md](./references/motion-physics.md) and the design-tokens HARD CONSTRAINTS block into the prompt as constraints.
+Use [references/prompts-library.md](./references/prompts-library.md). Every prompt has a `{{DNA}}` placeholder — paste the Phase 0 output there. Bake [references/accessibility-humanized.md](./references/accessibility-humanized.md), [references/mobile-touch-feel.md](./references/mobile-touch-feel.md), [references/motion-physics.md](./references/motion-physics.md), [references/variable-fonts.md](./references/variable-fonts.md) (use `font-variation-settings`, never static `font-weight: bold`) and the design-tokens HARD CONSTRAINTS block into the prompt as constraints.
 
 ### Phase 5 — Manual Soul Pass (no AI, 30–60 min)
 Follow the full ritual in [references/soul-pass-guide.md](./references/soul-pass-guide.md):
@@ -162,6 +162,7 @@ Dependencies: `bash` (3.2+, macOS default works) + `grep`. No Python, no npm.
 - [references/niche-playbooks.md](./references/niche-playbooks.md) — 30+ niche conventions + signature elements
 - [references/design-principles.md](./references/design-principles.md) — universal anti-AI principles
 - [references/copywriting-humanizer.md](./references/copywriting-humanizer.md) — 12 rules, cliché detector, before/after, tone recipes, founder anecdote
+- [references/variable-fonts.md](./references/variable-fonts.md) — ⭐ variable-axis animation (wght/slnt/opsz), fluid clamp() type, breathing keyframes, master prompt + per-DNA recipes
 - [references/motion-physics.md](./references/motion-physics.md) — Framer Motion + GSAP + CSS, 8 easings, anticipatory hover, magnetic CTA, irregular stagger, spring modals
 - [references/texture-and-shadows.md](./references/texture-and-shadows.md) — grain/noise overlay, layered studio shadows, paper/linen/blueprint/halftone, glassmorphism done right
 - [references/soul-pass-guide.md](./references/soul-pass-guide.md) — Phase 5 ritual: signature placement, 10 micro-imperfections, custom easings
